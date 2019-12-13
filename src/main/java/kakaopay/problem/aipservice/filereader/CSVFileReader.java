@@ -26,21 +26,17 @@ public class CSVFileReader implements FileReader {
         }
     }
 
+    @Override
     public List<Record> getRecode() {
         CSVParser parser = createCSVParser();
-        List<String> headerNames = parser.getHeaderNames();
 
         return StreamSupport.stream(parser.spliterator(), false)
-                .map(record -> createRecord(record, headerNames))
+                .map(this::createRecord)
                 .collect(Collectors.toList());
     }
 
-    private Record createRecord(CSVRecord record, List<String> headerNames) {
-        List<String> recordItems = headerNames.stream()
-                .map(record::get)
-                .collect(Collectors.toList());
-
-        return new Record(recordItems);
+    private Record createRecord(CSVRecord record) {
+        return new Record(record.toMap());
     }
 
     private CSVParser createCSVParser() {

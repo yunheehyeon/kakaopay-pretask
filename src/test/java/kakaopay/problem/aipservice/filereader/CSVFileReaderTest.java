@@ -18,13 +18,13 @@ class CSVFileReaderTest {
         expected.add("운전");
         expected.add("추천금액 이내");
         expected.add("3%");
-        expected.add("강릉시");
         expected.add("강릉지점");
         expected.add("강릉시 소재 영업점");
 
         CSVFileReader csvFileReader = new CSVFileReader("./src/main/resources/static/csv/problem1.csv");
         Record record = csvFileReader.getRecode().get(0);
 
-        assertThat(record.getRecordItems()).isEqualTo(expected);
+        assertThat(record.values()).hasSameSizeAs(expected);
+        assertThat(record.values()).hasSameElementsAs(expected);
     }
 }
