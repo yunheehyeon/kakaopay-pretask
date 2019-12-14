@@ -1,9 +1,13 @@
-Support
+== Support
 
-== Get Support information
+=== Get Support information
 === Request
 include::{snippets}/support/get/http-request.adoc[]
 === Response
 include::{snippets}/support/get/http-response.adoc[]
 
-
+=== Post Support information
+=== Request
+include::{snippets}/support/post/http-request.adoc[]
+=== Response
+include::{snippets}/support/post/http-response.adoc[]
