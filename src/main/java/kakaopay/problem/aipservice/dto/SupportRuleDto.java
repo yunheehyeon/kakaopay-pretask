@@ -22,7 +22,8 @@ public class SupportRuleDto {
 
     private String reception;
 
-    public SupportRuleDto(String region, String target, String usage, String limit, String rate, String institute, String mgmt, String reception) {
+    public SupportRuleDto(String region, String target, String usage, String limit,
+                          String rate, String institute, String mgmt, String reception) {
         this.region = region;
         this.target = target;
         this.usage = usage;

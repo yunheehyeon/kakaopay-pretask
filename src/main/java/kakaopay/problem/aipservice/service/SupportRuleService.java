@@ -8,8 +8,8 @@ import kakaopay.problem.aipservice.dto.SupportRuleDto;
 import kakaopay.problem.aipservice.filereader.CSVFileReader;
 import kakaopay.problem.aipservice.filereader.FileReader;
 import kakaopay.problem.aipservice.filereader.Record;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.util.List;
@@ -19,16 +19,16 @@ import java.util.stream.Collectors;
 public class SupportRuleService {
     private final SupportRuleRepository supportRuleRepository;
     private final RegionService regionService;
+    private final FileReader fileReader;
 
-    public SupportRuleService(SupportRuleRepository supportRuleRepository, RegionService regionService) {
+    public SupportRuleService(SupportRuleRepository supportRuleRepository, RegionService regionService, CSVFileReader csvFileReader) {
         this.supportRuleRepository = supportRuleRepository;
         this.regionService = regionService;
+        this.fileReader = csvFileReader;
     }
 
     public List<SupportRuleDto> saveCSVFile(File file) {
-        FileReader fileReader = new CSVFileReader(new File("./src/main/resources/static/csv/problem1.csv"));
-
-        return fileReader.getRecodes().stream()
+        return fileReader.getRecodes("static/csv/data.csv").stream()
                 .map(this::saveRecode)
                 .map(SupportRuleDto::from)
                 .collect(Collectors.toList());
@@ -39,5 +39,11 @@ public class SupportRuleService {
         Region region = regionService.findOrSave(record.getRegion());
 
         return supportRuleRepository.save(new SupportRule(region, supportContent));
+    }
+
+    public List<SupportRuleDto> read(Pageable pageable) {
+        return supportRuleRepository.findAll(pageable).stream()
+                .map(SupportRuleDto::from)
+                .collect(Collectors.toList());
     }
 }

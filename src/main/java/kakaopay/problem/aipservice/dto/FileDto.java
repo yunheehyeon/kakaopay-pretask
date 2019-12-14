@@ -1,7 +1,8 @@
 package kakaopay.problem.aipservice.dto;
 
-import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.File;
 
