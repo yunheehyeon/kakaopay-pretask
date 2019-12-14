@@ -28,4 +28,19 @@ class RegionRepositoryTest {
 
         assertThat(repoRegion.getId()).contains("reg");
     }
+
+    @Test
+    @DisplayName("Region name으로 조회")
+    void findByName() {
+        String regionName = "성남";
+
+        Region region = Region.builder().name(regionName).build();
+        Region persistRegion = testEntityManager.persist(region);
+        testEntityManager.flush();
+        testEntityManager.clear();
+
+        Region repoRegion = regionRepository.findByName(regionName).get();
+
+        assertThat(repoRegion.getName()).contains(regionName);
+    }
 }
