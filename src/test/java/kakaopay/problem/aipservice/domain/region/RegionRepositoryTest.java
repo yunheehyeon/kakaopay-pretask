@@ -17,7 +17,7 @@ class RegionRepositoryTest {
     private TestEntityManager testEntityManager;
 
     @Test
-    @DisplayName("Region 커스텀키로 생성")
+    @DisplayName("Region 커스텀키로 저장")
     void save() {
         Region region = Region.builder().name("성남").build();
         Region persistRegion = testEntityManager.persist(region);
