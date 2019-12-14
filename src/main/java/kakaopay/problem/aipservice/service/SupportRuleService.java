@@ -21,10 +21,10 @@ public class SupportRuleService {
     private final RegionService regionService;
     private final FileReader fileReader;
 
-    public SupportRuleService(SupportRuleRepository supportRuleRepository, RegionService regionService, CSVFileReader CSVFileReader) {
+    public SupportRuleService(SupportRuleRepository supportRuleRepository, RegionService regionService, CSVFileReader csvFileReader) {
         this.supportRuleRepository = supportRuleRepository;
         this.regionService = regionService;
-        this.fileReader = CSVFileReader;
+        this.fileReader = csvFileReader;
     }
 
     public List<SupportRuleDto> saveCSVFile(File file) {

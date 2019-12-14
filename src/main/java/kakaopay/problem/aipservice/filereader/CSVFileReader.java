@@ -1,7 +1,6 @@
 package kakaopay.problem.aipservice.filereader;
 
 import kakaopay.problem.aipservice.filereader.exception.CSVParserCreateException;
-import kakaopay.problem.aipservice.filereader.exception.ReaderCreatException;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
