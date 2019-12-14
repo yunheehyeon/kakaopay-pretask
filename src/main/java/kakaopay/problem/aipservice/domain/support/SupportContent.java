@@ -1,6 +1,10 @@
 package kakaopay.problem.aipservice.domain.support;
 
-import lombok.*;
+import kakaopay.problem.aipservice.filereader.Record;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -33,7 +37,6 @@ public class SupportContent {
     @Column(name = "reception", nullable = false)
     private String reception;
 
-    @Builder
     public SupportContent(String target, String usage, String limit, String rate, String institute, String mgmt, String reception) {
         this.target = target;
         this.usage = usage;
@@ -42,6 +45,18 @@ public class SupportContent {
         this.institute = institute;
         this.mgmt = mgmt;
         this.reception = reception;
+    }
+
+    public static SupportContent from(Record record) {
+        return new SupportContent(
+                record.getTarget(),
+                record.getUsage(),
+                record.getLimit(),
+                record.getRate(),
+                record.getInstitute(),
+                record.getMgmt(),
+                record.getReception()
+        );
     }
 
     @Override

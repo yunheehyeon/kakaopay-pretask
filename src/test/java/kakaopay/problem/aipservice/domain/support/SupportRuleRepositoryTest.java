@@ -21,17 +21,18 @@ class SupportRuleRepositoryTest {
     @Test
     @DisplayName("SupportRule 저장후 region으로 조회")
     void save() {
-        Region region = Region.builder().name("성남").build();
+        Region region = new Region("성남");
         Region persistRegion = testEntityManager.persist(region);
 
-        SupportContent supportContent = SupportContent.builder()
-                .target("성남시 소재 중소기업으로서 성남시장의 추천을 받은 자")
-                .usage("운전 및 시설")
-                .limit("5억원 이내")
-                .rate("1.80%")
-                .institute("성남시")
-                .mgmt("성남하이테크지")
-                .reception("전 영업점").build();
+        SupportContent supportContent = new SupportContent(
+                "성남시 소재 중소기업으로서 성남시장의 추천을 받은 자",
+                "운전 및 시설",
+                "5억원 이내",
+                "1.80%",
+                "성남시",
+                "성남하이테크지",
+                "전 영업점"
+        );
 
         SupportRule supportRule = SupportRule.builder()
                 .region(region)

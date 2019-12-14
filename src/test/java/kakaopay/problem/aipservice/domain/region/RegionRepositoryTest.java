@@ -19,7 +19,7 @@ class RegionRepositoryTest {
     @Test
     @DisplayName("Region 커스텀키로 저장")
     void save() {
-        Region region = Region.builder().name("성남").build();
+        Region region = new Region("성남");
         Region persistRegion = testEntityManager.persist(region);
         testEntityManager.flush();
         testEntityManager.clear();
@@ -34,7 +34,7 @@ class RegionRepositoryTest {
     void findByName() {
         String regionName = "성남";
 
-        Region region = Region.builder().name(regionName).build();
+        Region region = new Region(regionName);
         Region persistRegion = testEntityManager.persist(region);
         testEntityManager.flush();
         testEntityManager.clear();

@@ -23,7 +23,7 @@ public class RegionService {
     }
 
     public Region save(String regionName) {
-        Region region = Region.builder().name(regionName).build();
+        Region region = new Region(regionName);
 
         return regionRepository.save(region);
     }
@@ -36,5 +36,4 @@ public class RegionService {
             return save(regionName);
         }
     }
-
 }

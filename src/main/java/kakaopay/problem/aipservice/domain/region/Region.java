@@ -22,7 +22,6 @@ public class Region {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Builder
     public Region(String name) {
         this.name = name;
     }

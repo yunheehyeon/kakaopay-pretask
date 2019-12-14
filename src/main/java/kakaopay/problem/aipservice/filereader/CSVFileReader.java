@@ -6,6 +6,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import java.io.File;
 import java.io.Reader;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,20 +15,20 @@ import java.util.stream.StreamSupport;
 public class CSVFileReader implements FileReader {
     private final Reader reader;
 
-    public CSVFileReader(String filePath) {
-        reader = createReader(filePath);
+    public CSVFileReader(File file) {
+        reader = createReader(file);
     }
 
-    private java.io.FileReader createReader(String filePath) {
+    private java.io.FileReader createReader(File file) {
         try {
-            return new java.io.FileReader(filePath);
+            return new java.io.FileReader(file);
         } catch (Exception e) {
             throw new ReaderCreatException();
         }
     }
 
     @Override
-    public List<Record> getRecode() {
+    public List<Record> getRecodes() {
         CSVParser parser = createCSVParser();
 
         return StreamSupport.stream(parser.spliterator(), false)
