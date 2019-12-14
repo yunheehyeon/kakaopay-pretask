@@ -1,0 +1,9 @@
+Support
+
+== Get Support information
+=== Request
+include::{snippets}/support/get/http-request.adoc[]
+=== Response
+include::{snippets}/support/get/http-response.adoc[]
+
+

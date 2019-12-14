@@ -41,4 +41,9 @@ public class SupportRuleService {
         return supportRuleRepository.save(new SupportRule(region, supportContent));
     }
 
+    public List<SupportRuleDto> read(Pageable pageable) {
+        return supportRuleRepository.findAll(pageable).stream()
+                .map(SupportRuleDto::from)
+                .collect(Collectors.toList());
+    }
 }
