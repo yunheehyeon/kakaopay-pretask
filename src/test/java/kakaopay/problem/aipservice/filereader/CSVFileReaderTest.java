@@ -2,18 +2,21 @@ package kakaopay.problem.aipservice.filereader;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CSVFileReaderTest {
+
+    @Autowired
+    private CSVFileReader csvFileReader;
 
     @Test
     @DisplayName("FileReader로 읽은 Recode 확인")
     void getRecode() {
-        CSVFileReader csvFileReader = new CSVFileReader(new File("./src/main/resources/static/csv/problem1.csv"));
-        Record record = csvFileReader.getRecodes().get(0);
+        Record record = csvFileReader.getRecodes("static/csv/data.csv").get(0);
 
         assertThat(record.getRegion()).isEqualTo("강릉시");
         assertThat(record.getTarget()).isEqualTo("강릉시 소재 중소기업으로서 강릉시장이 추천한 자");
