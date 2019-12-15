@@ -40,6 +40,7 @@ class SupportRuleControllerTest {
     protected void setUp(RestDocumentationContextProvider restDocumentation) {
         this.webTestClient = WebTestClient.bindToServer()
                 .baseUrl("http://localhost:" + port)
+                .defaultHeader("Content-Type",  "application/json;charset=UTF-8")
                 .filter(documentationConfiguration(restDocumentation))
                 .build();
 
