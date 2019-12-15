@@ -1,22 +1,14 @@
 package kakaopay.problem.aipservice.controller;
 
-import kakaopay.problem.aipservice.dto.RegionSearchDto;
+import kakaopay.problem.aipservice.dto.FileDto;
 import kakaopay.problem.aipservice.dto.OrderLimitSearchDto;
+import kakaopay.problem.aipservice.dto.RegionSearchDto;
 import kakaopay.problem.aipservice.dto.SupportRuleDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.test.web.reactive.server.WebTestClient;
-import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -24,45 +16,21 @@ import java.io.UnsupportedEncodingException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation.document;
-import static org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation.documentationConfiguration;
 
-@AutoConfigureWebTestClient
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ExtendWith(RestDocumentationExtension.class)
-class SupportRuleControllerTest {
+class SupportRuleControllerTest extends AbstractWebTestClient {
 
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private WebTestClient webTestClient;
-
+    @Override
     @BeforeEach
     protected void setUp(RestDocumentationContextProvider restDocumentation) {
-        this.webTestClient = WebTestClient.bindToServer()
-                .baseUrl("http://localhost:" + port)
-                .defaultHeader("Content-Type", "application/json;charset=UTF-8")
-                .filter(documentationConfiguration(restDocumentation))
-                .build();
+        super.setUp(restDocumentation);
 
-        //저장
-        webTestClient.post()
-                .uri("/api/filesave")
-                .exchange()
-                .expectStatus()
-                .isOk();
+        postRequest("/api/filesave", new FileDto());
     }
 
     @Test
     @DisplayName("지원하는 지자체 페이지 조회")
     void read() throws IOException {
-        webTestClient.get()
-                .uri("/api/support?page=1&size=3")
-                .accept(MediaType.APPLICATION_JSON_UTF8)
-                .exchange()
-                .expectStatus()
-                .isOk()
-                .expectBody()
+        getRequest("/api/support?page=1&size=3")
                 .consumeWith(document("support/get",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())
@@ -72,14 +40,7 @@ class SupportRuleControllerTest {
     @Test
     @DisplayName("지자체 이름으로 조회")
     void readByName() throws UnsupportedEncodingException {
-        byte[] bytes = webTestClient.post()
-                .uri("/api/support/")
-                .accept(MediaType.APPLICATION_JSON_UTF8)
-                .body(Mono.just(new RegionSearchDto("성남시")), RegionSearchDto.class)
-                .exchange()
-                .expectStatus()
-                .isOk()
-                .expectBody()
+        byte[] bytes = postRequest("/api/support/", new RegionSearchDto("성남시"))
                 .consumeWith(document("support/post",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())
@@ -103,14 +64,7 @@ class SupportRuleControllerTest {
                 "전 영업점"
         );
 
-        byte[] bytes = webTestClient.put()
-                .uri("/api/support/")
-                .accept(MediaType.APPLICATION_JSON_UTF8)
-                .body(Mono.just(supportRuleDto), SupportRuleDto.class)
-                .exchange()
-                .expectStatus()
-                .isOk()
-                .expectBody()
+        byte[] bytes = putRequest("/api/support/", supportRuleDto)
                 .consumeWith(document("support/put",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())
@@ -123,14 +77,7 @@ class SupportRuleControllerTest {
     @Test
     @DisplayName("지원금액, 이차보전 순으로 K개 조회")
     void readByNumber() {
-        webTestClient.post()
-                .uri("/api/support/search")
-                .accept(MediaType.APPLICATION_JSON_UTF8)
-                .body(Mono.just(new OrderLimitSearchDto(10)), OrderLimitSearchDto.class)
-                .exchange()
-                .expectStatus()
-                .isOk()
-                .expectBody()
+        postRequest("/api/support/search", new OrderLimitSearchDto(10))
                 .consumeWith(document("support/search/post",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())
@@ -140,13 +87,7 @@ class SupportRuleControllerTest {
     @Test
     @DisplayName("가장 작은 이차보전 조회")
     void readMinRate() {
-        webTestClient.get()
-                .uri("/api/support/minRate")
-                .accept(MediaType.APPLICATION_JSON_UTF8)
-                .exchange()
-                .expectStatus()
-                .isOk()
-                .expectBody()
+        getRequest("/api/support/minRate")
                 .consumeWith(document("support/minRate/get",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())
@@ -156,10 +97,6 @@ class SupportRuleControllerTest {
     @AfterEach
     void tearDown() {
         // 모두 삭제
-        webTestClient.delete()
-                .uri("/api/support/")
-                .exchange()
-                .expectStatus()
-                .isOk();
+        deleteRequest("/api/support/");
     }
 }
