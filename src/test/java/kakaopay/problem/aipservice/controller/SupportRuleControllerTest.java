@@ -1,6 +1,7 @@
 package kakaopay.problem.aipservice.controller;
 
 import kakaopay.problem.aipservice.dto.RegionSearchDto;
+import kakaopay.problem.aipservice.dto.OrderLimitSearchDto;
 import kakaopay.problem.aipservice.dto.SupportRuleDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +41,7 @@ class SupportRuleControllerTest {
     protected void setUp(RestDocumentationContextProvider restDocumentation) {
         this.webTestClient = WebTestClient.bindToServer()
                 .baseUrl("http://localhost:" + port)
-                .defaultHeader("Content-Type",  "application/json;charset=UTF-8")
+                .defaultHeader("Content-Type", "application/json;charset=UTF-8")
                 .filter(documentationConfiguration(restDocumentation))
                 .build();
 
@@ -117,6 +118,39 @@ class SupportRuleControllerTest {
                 .getResponseBody();
 
         assertThat(new String(bytes, "utf-8")).contains("정보 변경");
+    }
+
+    @Test
+    @DisplayName("지원금액, 이차보전 순으로 K개 조회")
+    void readByNumber() {
+        webTestClient.post()
+                .uri("/api/support/search")
+                .accept(MediaType.APPLICATION_JSON_UTF8)
+                .body(Mono.just(new OrderLimitSearchDto(10)), OrderLimitSearchDto.class)
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectBody()
+                .consumeWith(document("support/search/post",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                ));
+    }
+
+    @Test
+    @DisplayName("가장 작은 이차보전 조회")
+    void readMinRate() {
+        webTestClient.get()
+                .uri("/api/support/minRate")
+                .accept(MediaType.APPLICATION_JSON_UTF8)
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectBody()
+                .consumeWith(document("support/minRate/get",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                ));
     }
 
     @AfterEach

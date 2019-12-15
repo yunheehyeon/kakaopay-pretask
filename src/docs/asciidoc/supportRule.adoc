@@ -17,3 +17,15 @@ include::{snippets}/support/post/http-response.adoc[]
 include::{snippets}/support/put/http-request.adoc[]
 === Response
 include::{snippets}/support/put/http-response.adoc[]
+
+=== Post Support information
+=== Request
+include::{snippets}/support/search/post/http-request.adoc[]
+=== Response
+include::{snippets}/support/search/post/http-response.adoc[]
+
+=== Get Support information
+=== Request
+include::{snippets}/support/minRate/get/http-request.adoc[]
+=== Response
+include::{snippets}/support/minRate/get/http-response.adoc[]

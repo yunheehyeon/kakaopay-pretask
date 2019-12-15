@@ -9,4 +9,6 @@ public interface SupportRuleRepository extends JpaRepository<SupportRule, Long> 
     Optional<SupportRule> findByRegion(Region region);
 
     Optional<SupportRule> findByRegionName(String regionName);
+
+    Optional<SupportRule> findTop1ByOrderBySupportContentRateAsc();
 }

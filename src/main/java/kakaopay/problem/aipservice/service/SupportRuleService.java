@@ -68,4 +68,11 @@ public class SupportRuleService {
 
         return SupportRuleDto.from(supportRule);
     }
+
+    public SupportRuleDto readMinRate() {
+        return SupportRuleDto.from(
+                supportRuleRepository.findTop1ByOrderBySupportContentRateAsc()
+                        .orElseThrow(NotFoundSupportRuleException::new)
+        );
+    }
 }
