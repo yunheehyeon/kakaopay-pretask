@@ -1,30 +1,45 @@
-== Support
+== SupportRule
 
-=== Get Support information
+=== 지원하는 지자체 목록 검색
+[cols=3*]
+|===
+|page
+|페이지 번호
+|기본값 = 1
+
+|size
+|요청 개수
+|기본값 = 10, 최대값 = 50
+
+|direction
+|정렬 기준(region_id)
+|기본값 = ASC
+|===
 === Request
 include::{snippets}/support/get/http-request.adoc[]
 === Response
 include::{snippets}/support/get/http-response.adoc[]
 
-=== Post Support information
+
+=== 지자체명을 입력 받아 해당 지자체의 지원정보를 출력
 === Request
 include::{snippets}/support/post/http-request.adoc[]
 === Response
 include::{snippets}/support/post/http-response.adoc[]
 
-=== Put Support information
+=== 지원하는 지자체 정보 수정 기능
 === Request
 include::{snippets}/support/put/http-request.adoc[]
 === Response
 include::{snippets}/support/put/http-response.adoc[]
 
-=== Post Support information
+=== 지원한도 컬럼에서 지원금액으로 내림차순 정렬
 === Request
-include::{snippets}/support/search/post/http-request.adoc[]
+include::{snippets}/support/limit/post/http-request.adoc[]
 === Response
-include::{snippets}/support/search/post/http-response.adoc[]
+include::{snippets}/support/limit/post/http-response.adoc[]
 
-=== Get Support information
+=== 이차보전 컬럼에서 보전 비율이 가장 작은 지차제 조회
 === Request
 include::{snippets}/support/minRate/get/http-request.adoc[]
 === Response

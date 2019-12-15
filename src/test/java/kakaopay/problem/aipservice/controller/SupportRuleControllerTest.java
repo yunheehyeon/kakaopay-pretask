@@ -30,7 +30,7 @@ class SupportRuleControllerTest extends AbstractWebTestClient {
     @Test
     @DisplayName("지원하는 지자체 페이지 조회")
     void read() throws IOException {
-        getRequest("/api/support?page=1&size=3")
+        getRequest("/api/support?page=1&size=3&direction=ASC")
                 .consumeWith(document("support/get",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())
@@ -77,8 +77,8 @@ class SupportRuleControllerTest extends AbstractWebTestClient {
     @Test
     @DisplayName("지원금액, 이차보전 순으로 K개 조회")
     void readByNumber() {
-        postRequest("/api/support/search", new OrderLimitSearchDto(10))
-                .consumeWith(document("support/search/post",
+        postRequest("/api/support/limit/order", new OrderLimitSearchDto(5))
+                .consumeWith(document("support/limit/post",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())
                 ));

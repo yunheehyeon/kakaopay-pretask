@@ -1,5 +1,6 @@
 package kakaopay.problem.aipservice.domain.support;
 
+
 import kakaopay.problem.aipservice.domain.region.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
 
