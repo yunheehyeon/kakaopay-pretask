@@ -1,6 +1,6 @@
 package kakaopay.problem.aipservice.controller;
 
-import kakaopay.problem.aipservice.dto.FileDto;
+import kakaopay.problem.aipservice.dto.RegionSearchDto;
 import kakaopay.problem.aipservice.dto.SupportRuleDto;
 import kakaopay.problem.aipservice.service.SupportRuleService;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +17,20 @@ public class SupportRuleController {
         this.supportRuleService = supportRuleService;
     }
 
-    @PostMapping
-    public ResponseEntity<List<SupportRuleDto>> save(@RequestBody FileDto fileDto) {
-        return ResponseEntity.ok(supportRuleService.saveCSVFile(fileDto.getFile()));
-    }
-
     @GetMapping
     public ResponseEntity<List<SupportRuleDto>> read(Pageable pageable) {
         return ResponseEntity.ok(supportRuleService.read(pageable.of()));
+    }
+
+    @PostMapping
+    public ResponseEntity<SupportRuleDto> read(@RequestBody RegionSearchDto regionSearchDto) {
+        return ResponseEntity.ok(supportRuleService.read(regionSearchDto));
+    }
+
+    @DeleteMapping
+    public ResponseEntity removeAll() {
+        supportRuleService.deleteAll();
+
+        return ResponseEntity.ok().build();
     }
 }

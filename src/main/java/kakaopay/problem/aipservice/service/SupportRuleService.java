@@ -4,10 +4,12 @@ import kakaopay.problem.aipservice.domain.region.Region;
 import kakaopay.problem.aipservice.domain.support.SupportContent;
 import kakaopay.problem.aipservice.domain.support.SupportRule;
 import kakaopay.problem.aipservice.domain.support.SupportRuleRepository;
+import kakaopay.problem.aipservice.dto.RegionSearchDto;
 import kakaopay.problem.aipservice.dto.SupportRuleDto;
 import kakaopay.problem.aipservice.filereader.CSVFileReader;
 import kakaopay.problem.aipservice.filereader.FileReader;
 import kakaopay.problem.aipservice.filereader.Record;
+import kakaopay.problem.aipservice.service.exception.NotFoundSupportRuleException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +47,16 @@ public class SupportRuleService {
         return supportRuleRepository.findAll(pageable).stream()
                 .map(SupportRuleDto::from)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteAll() {
+        supportRuleRepository.deleteAll();
+    }
+
+    public SupportRuleDto read(RegionSearchDto regionSearchDto) {
+        Region region = regionService.findByName(regionSearchDto.getRegion());
+
+        return SupportRuleDto.from(supportRuleRepository.findByRegion(region)
+                .orElseThrow(NotFoundSupportRuleException::new));
     }
 }
