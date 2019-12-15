@@ -55,9 +55,7 @@ public class SupportRuleService {
     }
 
     public SupportRuleDto read(RegionSearchDto regionSearchDto) {
-        Region region = regionService.findByName(regionSearchDto.getRegion());
-
-        return SupportRuleDto.from(supportRuleRepository.findByRegion(region)
+        return SupportRuleDto.from(supportRuleRepository.findByRegionName(regionSearchDto.getRegion())
                 .orElseThrow(NotFoundSupportRuleException::new));
     }
 
