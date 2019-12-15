@@ -1,5 +1,9 @@
 == SupportRule
 
+=== 내부 파일 읽기
+=== Request
+include::{snippets}/fileread/http-request.adoc[]
+
 === 지원하는 지자체 목록 검색
 [cols=3*]
 |===

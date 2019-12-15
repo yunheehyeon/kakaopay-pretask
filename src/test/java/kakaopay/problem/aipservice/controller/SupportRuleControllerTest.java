@@ -24,7 +24,7 @@ class SupportRuleControllerTest extends AbstractWebTestClient {
     protected void setUp(RestDocumentationContextProvider restDocumentation) {
         super.setUp(restDocumentation);
 
-        postRequest("/api/filesave", new FileDto());
+        getRequest("/api/fileread");
     }
 
     @Test

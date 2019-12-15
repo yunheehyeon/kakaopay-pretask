@@ -3,10 +3,10 @@ package kakaopay.problem.aipservice.controller;
 import kakaopay.problem.aipservice.dto.SupportRuleDto;
 import kakaopay.problem.aipservice.service.SupportRuleService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
 import java.util.List;
 
 @RestController
@@ -17,8 +17,8 @@ public class FileSaveController {
         this.supportRuleService = supportRuleService;
     }
 
-    @PostMapping("/api/filesave")
+    @GetMapping("/api/fileread")
     public ResponseEntity<List<SupportRuleDto>> save() {
-        return ResponseEntity.ok(supportRuleService.saveCSVFile(new File("")));
+        return ResponseEntity.ok(supportRuleService.saveCSVFile());
     }
 }

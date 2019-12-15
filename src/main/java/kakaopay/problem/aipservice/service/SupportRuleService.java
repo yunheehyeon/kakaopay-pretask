@@ -30,7 +30,7 @@ public class SupportRuleService {
         this.fileReader = csvFileReader;
     }
 
-    public List<SupportRuleDto> saveCSVFile(File file) {
+    public List<SupportRuleDto> saveCSVFile() {
         return fileReader.getRecodes("static/csv/data.csv").stream()
                 .map(this::saveRecode)
                 .map(SupportRuleDto::from)
