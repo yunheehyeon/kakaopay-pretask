@@ -56,7 +56,7 @@ Content-Type: application/json;charset=UTF-8
 Accept: application/json;charset=UTF-8
 Host: localhost:51980
 ~~~
-###지원하는 지자체 목록 검색
+### 지원하는 지자체 목록 검색
 
 
 | 변수 | 설명 | 값 |
