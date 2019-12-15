@@ -35,11 +35,11 @@ include::{snippets}/support/put/http-response.adoc[]
 
 === 지원한도 컬럼에서 지원금액으로 내림차순 정렬
 === Request
-include::{snippets}/support/search/post/http-request.adoc[]
+include::{snippets}/support/limit/post/http-request.adoc[]
 === Response
-include::{snippets}/support/search/post/http-response.adoc[]
+include::{snippets}/support/limit/post/http-response.adoc[]
 
-=== Get Support information
+=== 이차보전 컬럼에서 보전 비율이 가장 작은 지차제 조회
 === Request
 include::{snippets}/support/minRate/get/http-request.adoc[]
 === Response

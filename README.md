@@ -1,5 +1,9 @@
 #  지자체 협약 지원 API 개발 
 
+### 개발 환경
+* IDE : IntelliJ  
+* java 버전 : 10
+* framework : spring boot
 
 ### 기능 정리
 * 데이터 파일에서 각 레코드를 데이터베이스에 저장
@@ -15,7 +19,27 @@
 
 * 수정 요청은 수정할 정보 외에 바뀌지 않은 모든 정보가 필요
 
-* 지원금액 정렬 '추천금액 이내'가 가장 큰 값, 이차보전 평균 비율이 적은 순서
+* 지원금액 정렬 '추천금액 이내'가 가장 큰 값, 이차보전 평균 비율도 큰값으로 정렬
 
 * Rest Docs 결과 인코딩 -> MediaType.APPLICATION_JSON_UTF8 해더추가 (하지만 해당 해더가 더 이상 사용되지 않음)
+
 * Rest Docs 요청 응답만 자동화, 표 만들기는 수기로 작성
+
+### 빌드 및 실행방법
+
+~~~
+프로젝트 클론
+- git clone -b master https://github.com/yunheehyeon/kakaopay-pretask.git
+
+프로젝트 폴더 이동
+- cd kakaopay-pretask
+
+빌드
+- bash ./gradlew clean build
+
+빌드 파일 있는 곳으로 이동
+- cd build/libs
+
+실행
+java -jar (빌드 파일 이름)
+~~~
