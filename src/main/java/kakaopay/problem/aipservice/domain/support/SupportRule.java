@@ -31,6 +31,10 @@ public class SupportRule {
         this.supportContent = supportContent;
     }
 
+    public void update(SupportContent supportContent) {
+        this.supportContent = supportContent;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

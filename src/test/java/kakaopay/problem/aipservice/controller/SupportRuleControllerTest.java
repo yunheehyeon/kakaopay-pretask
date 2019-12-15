@@ -1,6 +1,7 @@
 package kakaopay.problem.aipservice.controller;
 
 import kakaopay.problem.aipservice.dto.RegionSearchDto;
+import kakaopay.problem.aipservice.dto.SupportRuleDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -84,6 +85,37 @@ class SupportRuleControllerTest {
                 .getResponseBody();
 
         assertThat(new String(bytes, "utf-8")).contains("성남시");
+    }
+
+    @Test
+    @DisplayName("지자체 정보 업데이트")
+    void update() throws UnsupportedEncodingException {
+        SupportRuleDto supportRuleDto = new SupportRuleDto(
+                "성남시",
+                "성남시 소재 중소기업으로서 성남시장의 추천을 받은 자",
+                "정보 변경",
+                "5억원 이내",
+                "1.80%",
+                "성남시",
+                "정보 변경",
+                "전 영업점"
+        );
+
+        byte[] bytes = webTestClient.put()
+                .uri("/api/support/")
+                .accept(MediaType.APPLICATION_JSON_UTF8)
+                .body(Mono.just(supportRuleDto), SupportRuleDto.class)
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectBody()
+                .consumeWith(document("support/put",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                )).returnResult()
+                .getResponseBody();
+
+        assertThat(new String(bytes, "utf-8")).contains("정보 변경");
     }
 
     @AfterEach

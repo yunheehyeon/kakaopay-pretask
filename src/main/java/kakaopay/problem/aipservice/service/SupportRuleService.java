@@ -12,6 +12,7 @@ import kakaopay.problem.aipservice.filereader.Record;
 import kakaopay.problem.aipservice.service.exception.NotFoundSupportRuleException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.util.List;
@@ -58,5 +59,15 @@ public class SupportRuleService {
 
         return SupportRuleDto.from(supportRuleRepository.findByRegion(region)
                 .orElseThrow(NotFoundSupportRuleException::new));
+    }
+
+    @Transactional
+    public SupportRuleDto update(SupportRuleDto updateSupportRuleDto) {
+        SupportRule supportRule = supportRuleRepository.findByRegionName(updateSupportRuleDto.getRegion())
+                .orElseThrow(NotFoundSupportRuleException::new);
+
+        supportRule.update(updateSupportRuleDto.createSupportContent());
+
+        return SupportRuleDto.from(supportRule);
     }
 }

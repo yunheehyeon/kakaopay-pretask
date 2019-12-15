@@ -3,23 +3,18 @@ package kakaopay.problem.aipservice.dto;
 import kakaopay.problem.aipservice.domain.support.SupportContent;
 import kakaopay.problem.aipservice.domain.support.SupportRule;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class SupportRuleDto {
     private String region;
-
     private String target;
-
     private String usage;
-
     private String limit;
-
     private String rate;
-
     private String institute;
-
     private String mgmt;
-
     private String reception;
 
     public SupportRuleDto(String region, String target, String usage, String limit,
@@ -46,6 +41,18 @@ public class SupportRuleDto {
                 content.getInstitute(),
                 content.getMgmt(),
                 content.getReception()
+        );
+    }
+
+    public SupportContent createSupportContent() {
+        return new SupportContent(
+                target,
+                usage,
+                limit,
+                rate,
+                institute,
+                mgmt,
+                reception
         );
     }
 }
