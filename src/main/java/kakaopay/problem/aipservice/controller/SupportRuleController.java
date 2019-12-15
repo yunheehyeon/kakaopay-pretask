@@ -28,14 +28,14 @@ public class SupportRuleController {
         return ResponseEntity.ok(supportRuleService.readMinRate());
     }
 
-    @PostMapping("/search")
-    public ResponseEntity<List<SupportRuleDto>> read(@RequestBody OrderLimitSearchDto orderLimitSearchDto) {
-        return ResponseEntity.ok(supportRuleService.read(orderLimitSearchDto.toPageable()));
-    }
-
     @PostMapping
     public ResponseEntity<SupportRuleDto> read(@RequestBody RegionSearchDto regionSearchDto) {
         return ResponseEntity.ok(supportRuleService.read(regionSearchDto));
+    }
+
+    @PostMapping("/limit/order")
+    public ResponseEntity<List<SupportRuleDto>> read(@RequestBody OrderLimitSearchDto orderLimitSearchDto) {
+        return ResponseEntity.ok(supportRuleService.read(orderLimitSearchDto.toPageable()));
     }
 
     @PutMapping

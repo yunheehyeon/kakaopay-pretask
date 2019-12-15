@@ -77,7 +77,7 @@ class SupportRuleControllerTest extends AbstractWebTestClient {
     @Test
     @DisplayName("지원금액, 이차보전 순으로 K개 조회")
     void readByNumber() {
-        postRequest("/api/support/search", new OrderLimitSearchDto(10))
+        postRequest("/api/support/limit/order", new OrderLimitSearchDto(10))
                 .consumeWith(document("support/search/post",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())
