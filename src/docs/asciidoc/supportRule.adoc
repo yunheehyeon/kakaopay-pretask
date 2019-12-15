@@ -11,3 +11,9 @@ include::{snippets}/support/get/http-response.adoc[]
 include::{snippets}/support/post/http-request.adoc[]
 === Response
 include::{snippets}/support/post/http-response.adoc[]
+
+=== Put Support information
+=== Request
+include::{snippets}/support/put/http-request.adoc[]
+=== Response
+include::{snippets}/support/put/http-response.adoc[]

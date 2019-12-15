@@ -27,6 +27,11 @@ public class SupportRuleController {
         return ResponseEntity.ok(supportRuleService.read(regionSearchDto));
     }
 
+    @PutMapping
+    public ResponseEntity<SupportRuleDto> update(@RequestBody SupportRuleDto supportRuleDto) {
+        return ResponseEntity.ok(supportRuleService.update(supportRuleDto));
+    }
+
     @DeleteMapping
     public ResponseEntity removeAll() {
         supportRuleService.deleteAll();
