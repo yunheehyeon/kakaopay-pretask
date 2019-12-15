@@ -25,12 +25,12 @@ public class Pageable {
     }
 
     public void setSize(int size) {
-        int MAX_SIZE = 50;
-        this.size = Math.min(size, MAX_SIZE);
+        int maxSize = 50;
+        this.size = Math.min(size, maxSize);
     }
 
     public void setDirection(Sort.Direction direction) {
-        this.direction = (direction != Sort.Direction.ASC) && (direction != Sort.Direction.DESC) ? DEFAULT_DIRECTION : direction;
+        this.direction = (direction == Sort.Direction.ASC) || (direction == Sort.Direction.DESC) ? direction : DEFAULT_DIRECTION;
     }
 
     public PageRequest of() {

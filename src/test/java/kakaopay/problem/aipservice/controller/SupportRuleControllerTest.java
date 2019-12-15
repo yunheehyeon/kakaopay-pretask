@@ -30,7 +30,7 @@ class SupportRuleControllerTest extends AbstractWebTestClient {
     @Test
     @DisplayName("지원하는 지자체 페이지 조회")
     void read() throws IOException {
-        getRequest("/api/support?page=1&size=3")
+        getRequest("/api/support?page=1&size=3&direction=ASC")
                 .consumeWith(document("support/get",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())
